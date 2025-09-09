@@ -1,9 +1,12 @@
+let leerlingen = [
+  { naam: "Jarne", streepjes: 0, minpunten: 0 },
+  { naam: "Xen", streepjes: 0, minpunten: 0 },
+  { naam: "Xander", streepjes: 0, minpunten: 0 }
+];
 
- let leerlingen = JSON.parse(localStorage.getItem("leerlingen")) || [
-      { naam: "Jarne", streepjes: 0, minpunten: 0 },
-      { naam: "Xen", streepjes: 0, minpunten: 0 },
-      { naam: "Xander", streepjes: 0, minpunten: 0 }
-    ];
+localStorage.setItem("leerlingen", JSON.stringify(leerlingen));
+
+ 
 
     function renderTabel() {
       const tbody = document.getElementById("studentTable");
@@ -37,6 +40,21 @@
       }
 
       renderTabel();
+    }
+    function voegLeerlingToe() {
+      const naam = document.getElementById("nieuweLeerling").value.trim();
+      if (!naam) return alert("Geef een naam in!");
+
+      leerlingen.push({ naam: naam, streepjes: 0, minpunten: 0 });
+      document.getElementById("nieuweLeerling").value = "";
+      renderTabel();
+    }
+
+    function verwijderLeerling(index) {
+      if (confirm(`Weet je zeker dat je ${leerlingen[index].naam} wil verwijderen?`)) {
+        leerlingen.splice(index, 1);
+        renderTabel();
+      }
     }
 
     window.onload = renderTabel;
