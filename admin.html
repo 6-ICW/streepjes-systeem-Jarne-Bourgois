@@ -1,28 +1,43 @@
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
   <title>Admin View</title>
-  <script src="./js/scriptadmin.js"></script>
   <link rel="stylesheet" href="/css/stijl.css">
+   <script src="./js/scriptadmin.js"></script>
 </head>
 <body>
-  <h2>Admin View</h2>
-    <div class="form-container">
-    <input type="text" id="nieuweLeerling" placeholder="Naam nieuwe leerling">
-    <button onclick="voegLeerlingToe()">Toevoegen</button>
+  <h2 class="center">Admin View</h2>
+
+  <!-- Stap 1: Klas kiezen -->
+  <div id="klasSelectie" class="center">
+    <label for="klasSelect">Kies een klas:</label>
+    <select id="klasSelect">
+      <option value="">-- Selecteer --</option>
+      <option value="6ICW">6ICW</option>
+      <option value="6BCW">6BCW</option>
+    </select>
+    <button onclick="selecteerKlas()">Ga verder</button>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Naam</th>
-        <th>Streepjes</th>
-        <th>Minpunten</th>
-        <th>Acties</th>
-      </tr>
-    </thead>
-    <tbody id="studentTable"></tbody>
-  </table>
+
+  <!-- Stap 2: Leerlingen beheren -->
+  <div id="adminContent" class="hidden">
+    <div class="form-container">
+      <input type="text" id="nieuweLeerling" placeholder="Naam nieuwe leerling">
+      <button onclick="voegLeerlingToe()">Toevoegen</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Naam</th>
+          <th>Streepjes</th>
+          <th>Minpunten</th>
+          <th>Acties</th>
+        </tr>
+      </thead>
+      <tbody id="studentTable"></tbody>
+    </table>
+  </div>
 </body>
 </html>

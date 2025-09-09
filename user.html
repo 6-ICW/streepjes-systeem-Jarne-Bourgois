@@ -3,14 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>User View</title>
+  <link rel="stylesheet" href="/css/stijl2.css">
   <script src="./js/scriptuser.js"></script>
 </head>
 <body>
-  <h2>Leerling Status</h2>
-  <div id="status">
+  <h2 class="center">Leerling View</h2>
+
+  <!-- Stap 1: Klas kiezen -->
+  <div id="klasSelectie" class="center">
+    <label for="klasSelect">Kies je klas:</label>
+    <select id="klasSelect">
+      <option value="">-- Selecteer --</option>
+      <option value="6ICW">6ICW</option>
+      <option value="6BCW">6BCW</option>
+    </select>
+    <button onclick="selecteerKlas()">Ga verder</button>
+  </div>
+
+  <!-- Stap 2: Leerling kiezen -->
+  <div id="leerlingSelectie" class="center hidden">
+    <label for="leerlingSelect">Kies je naam:</label>
+    <select id="leerlingSelect"></select>
+    <button onclick="selecteerLeerling()">Bekijk status</button>
+  </div>
+
+  <!-- Stap 3: Status tonen -->
+  <div id="status" class="center hidden">
+    <h3>Status</h3>
     <p>Naam: <span id="naam"></span></p>
     <p>Streepjes: <span id="streepjes"></span></p>
     <p>Minpunten: <span id="minpunten"></span></p>
+    <button onclick="toonStatus()">🔄 Ververs</button>
   </div>
 </body>
 </html>

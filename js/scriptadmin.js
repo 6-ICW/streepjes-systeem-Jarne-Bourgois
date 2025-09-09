@@ -1,12 +1,16 @@
-let leerlingen = [
-  { naam: "Jarne", streepjes: 0, minpunten: 0 },
-  { naam: "Xen", streepjes: 0, minpunten: 0 },
-  { naam: "Xander", streepjes: 0, minpunten: 0 }
-];
+ let huidigeKlas = null;
+    let leerlingen = [];
 
-localStorage.setItem("leerlingen", JSON.stringify(leerlingen));
+    function selecteerKlas() {
+      huidigeKlas = document.getElementById("klasSelect").value;
+      if (!huidigeKlas) return;
 
- 
+      // Data ophalen of nieuw aanmaken voor de gekozen klas
+      leerlingen = JSON.parse(localStorage.getItem("leerlingen_" + huidigeKlas)) || [];
+      document.getElementById("klasSelectie").classList.add("hidden");
+      document.getElementById("adminContent").classList.remove("hidden");
+      renderTabel();
+    }
 
     function renderTabel() {
       const tbody = document.getElementById("studentTable");
@@ -20,11 +24,12 @@ localStorage.setItem("leerlingen", JSON.stringify(leerlingen));
             <td>
               <button onclick="updateStreepje(${i}, 1)">+</button>
               <button onclick="updateStreepje(${i}, -1)">-</button>
+              <button onclick="verwijderLeerling(${i})">🗑️</button>
             </td>
           </tr>
         `;
       });
-      localStorage.setItem("leerlingen", JSON.stringify(leerlingen));
+      localStorage.setItem("leerlingen_" + huidigeKlas, JSON.stringify(leerlingen));
     }
 
     function updateStreepje(index, change) {
@@ -41,6 +46,7 @@ localStorage.setItem("leerlingen", JSON.stringify(leerlingen));
 
       renderTabel();
     }
+
     function voegLeerlingToe() {
       const naam = document.getElementById("nieuweLeerling").value.trim();
       if (!naam) return alert("Geef een naam in!");
@@ -56,5 +62,3 @@ localStorage.setItem("leerlingen", JSON.stringify(leerlingen));
         renderTabel();
       }
     }
-
-    window.onload = renderTabel;
